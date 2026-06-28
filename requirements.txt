@@ -5,3 +5,4 @@ mistralai
 fastapi
 uvicorn
 python-dotenv
+pre-commit
