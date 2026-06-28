@@ -6,3 +6,5 @@ fastapi
 uvicorn
 python-dotenv
 pre-commit
+requests
+pandas
