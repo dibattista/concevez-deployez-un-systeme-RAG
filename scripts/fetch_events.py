@@ -164,17 +164,112 @@ def main():
     print("-" * 50)
     print(f"Récupération terminée. Nombre total d'événements : {len(all_events)}")
 
-    # 4. Sauvegarder le résultat dans data/events_raw.json
+    # 4. Sauvegarder le résultat brut dans data/events_raw.json
     output_dir = "data"
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "events_raw.json")
+    raw_output_path = os.path.join(output_dir, "events_raw.json")
 
     try:
-        with open(output_path, "w", encoding="utf-8") as f:
+        with open(raw_output_path, "w", encoding="utf-8") as f:
             json.dump(all_events, f, ensure_ascii=False, indent=2)
-        print(f"Succès : Les événements ont été sauvegardés dans '{output_path}'.")
+        print(
+            f"Succès : Les événements bruts ont été sauvegardés dans '{raw_output_path}'."
+        )
     except Exception as e:
-        print(f"Erreur lors de l'écriture du fichier de sortie : {e}")
+        print(f"Erreur lors de l'écriture du fichier brut : {e}")
+
+    # 5. Nettoyer et sauvegarder le résultat final propre pour le RAG
+    clean_output_path = os.path.join(output_dir, "events_clean.json")
+    clean_and_save_events(all_events, clean_output_path)
+
+
+def clean_and_save_events(raw_events, output_path):
+    """
+    Nettoie les événements bruts récupérés et les sauvegarde dans un fichier propre.
+
+    Opérations de nettoyage commentées :
+    1. Déduplication : Élimination des doublons basés sur l'identifiant unique 'uid'.
+    2. Filtrage des valeurs manquantes : Suppression des événements n'ayant pas de 'location'.
+    3. Simplification des langues : Conservation uniquement des textes en français (titre, description, keywords).
+    4. Sélection des champs utiles pour le RAG.
+    """
+    print("\n" + "=" * 50)
+    print("Étape de nettoyage des données...")
+    print("=" * 50)
+
+    cleaned_events = []
+    seen_uids = set()
+
+    for event in raw_events:
+        uid = event.get("uid")
+
+        # --- ÉTAPE 1 : Déduplication ---
+        # Si l'événement n'a pas d'UID ou a déjà été traité (doublon), on passe.
+        if not uid or uid in seen_uids:
+            continue
+
+        # --- ÉTAPE 2 : Gestion des valeurs manquantes ---
+        # Si l'événement n'a pas d'adresse/localisation, on l'ignore (indispensable pour le RAG)
+        location = event.get("location")
+        if not location or not isinstance(location, dict):
+            continue
+
+        # --- ÉTAPE 3 : Simplification des langues (uniquement le français) ---
+        # On extrait la version française ('fr') des dictionnaires s'ils existent.
+
+        # Extraction du titre en français
+        title = event.get("title")
+        if isinstance(title, dict):
+            title_fr = title.get("fr", "")
+        else:
+            title_fr = str(title) if title is not None else ""
+
+        # Extraction de la description en français
+        description = event.get("description")
+        if isinstance(description, dict):
+            description_fr = description.get("fr", "")
+        else:
+            description_fr = (
+                str(description) if description is not None else ""
+            )
+
+        # Extraction des mots-clés en français
+        keywords = event.get("keywords")
+        if isinstance(keywords, dict):
+            keywords_fr = keywords.get("fr", [])
+        else:
+            keywords_fr = []
+
+        # --- ÉTAPE 4 : Reconstruction de l'événement propre ---
+        cleaned_event = {
+            "uid": uid,
+            "slug": event.get("slug", ""),
+            "title_fr": title_fr,
+            "description_fr": description_fr,
+            "keywords_fr": keywords_fr,
+            "location": location,
+            "firstTiming": event.get("firstTiming"),
+            "lastTiming": event.get("lastTiming"),
+            "attendanceMode": event.get("attendanceMode"),
+        }
+
+        cleaned_events.append(cleaned_event)
+        seen_uids.add(uid)
+
+    print(
+        f"Nettoyage terminé : {len(cleaned_events)} événements uniques "
+        f"conservés (sur {len(raw_events)} bruts)."
+    )
+
+    # Sauvegarde du fichier propre data/events_clean.json
+    try:
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(cleaned_events, f, ensure_ascii=False, indent=2)
+        print(
+            f"Succès : Les événements nettoyés ont été sauvegardés dans '{output_path}'."
+        )
+    except Exception as e:
+        print(f"Erreur lors de l'écriture du fichier nettoyé : {e}")
 
 
 if __name__ == "__main__":

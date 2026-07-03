@@ -20,3 +20,4 @@ __pycache__/
 # data
 data/events_raw.json
 data/events_clean.json
+data/*.json
