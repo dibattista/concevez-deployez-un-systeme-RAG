@@ -21,3 +21,4 @@ __pycache__/
 data/events_raw.json
 data/events_clean.json
 data/*.json
+data/faiss_index/
