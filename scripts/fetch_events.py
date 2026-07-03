@@ -251,6 +251,7 @@ def clean_and_save_events(raw_events, output_path):
             "firstTiming": event.get("firstTiming"),
             "lastTiming": event.get("lastTiming"),
             "attendanceMode": event.get("attendanceMode"),
+            "image": event.get("image"),
         }
 
         cleaned_events.append(cleaned_event)
