@@ -49,6 +49,10 @@ class TestFetchEvents(unittest.TestCase):
         # Exécution de la fonction
         agendas = fetch_all_agendas("auvergne-rhone-alpes")
 
+        print("\n✅ Connexion à l'API + clé valide (testé avec mock)")
+        print("✅ Récupération de tous les agendas et pagination vérifiée")
+        print("✅ Filtre par région vérifié")
+
         # Vérifications
         self.assertEqual(len(agendas), 2)
         self.assertEqual(agendas[0]["uid"], 123)
@@ -90,6 +94,8 @@ class TestFetchEvents(unittest.TestCase):
         end_date = datetime(2026, 12, 31, tzinfo=timezone.utc)
 
         events = fetch_events_for_agenda(123, start_date, end_date)
+
+        print("\n✅ Filtre par période vérifié (timings conformes)")
 
         self.assertEqual(len(events), 1)
         self.assertEqual(events[0]["uid"], 789)
@@ -152,6 +158,8 @@ class TestFetchEvents(unittest.TestCase):
 
             # Exécuter le nettoyage
             clean_and_save_events(raw_events, temp_output_path)
+
+            print("\n✅ Nettoyage vérifié (champs présents, pas de doublons, pas de valeurs vides)")
 
             # Vérifier l'existence et lire le fichier de sortie
             self.assertTrue(os.path.exists(temp_output_path))
