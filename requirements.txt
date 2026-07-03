@@ -8,3 +8,4 @@ python-dotenv
 pre-commit
 requests
 pandas
+langchain-mistralai
