@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "category": "simple",
+    "question": "Quels événements sont prévus à Coucouron ?",
+    "expected_answer": "Il y a deux événements prévus à Coucouron :\n1. 'Facturation électronique', une réunion d’information interconsulaire sur la mise en place de la facturation électronique, prévue le 1er juin 2026 de 16h00 à 17h00 à la Chambre d'agriculture de l'Ardèche - Antenne Montagne.\n2. Le rendez-vous TEHMA intitulé 'Élevage laitier : temps de travail et perspectives', un temps d'échange sur l'élevage laitier prévu le 23 mars 2026 de 13h30 à 16h30 à la Chambre d'agriculture de l'Ardèche - Antenne Montagne."
+  },
+  {
+    "id": 2,
+    "category": "simple",
+    "question": "Où et quand se déroule la journée technique sur la viticulture et la taille mécanique ?",
+    "expected_answer": "La matinée technique 'JOURNÉE TECHNIQUE VITICULTURE – TAILLE MÉCANIQUE' se déroulera le vendredi 13 mars 2026 de 09h00 à 12h30 à la cave de Montfleury, située au 600 chemin de la cave, à Mirabel (07)."
+  },
+  {
+    "id": 3,
+    "category": "simple",
+    "question": "De quoi parle le webinaire 'Castanea Sativa' ?",
+    "expected_answer": "Le 'Webinaire Castanea Sativa' est consacré aux plants de châtaigniers Castanea sativa résistants à la maladie de l'encre. Il est proposé par la Chambre d'agriculture de l'Ardèche sous forme de webinaire en ligne le 8 juillet 2026 de 04h30 à 05h00."
+  },
+  {
+    "id": 4,
+    "category": "simple",
+    "question": "Quels sont les événements prévus dans la ville de Privas ?",
+    "expected_answer": "Deux événements sont prévus à la Chambre d'agriculture de l'Ardèche à Privas (4 avenue de l'Europe unie) :\n1. Le 'WEBINAIRES Anticiper et réussir sa transmission agricole' le 27 avril 2026 de 11h00 à 12h00.\n2. Le 'WEBINAIRE Plantation arbres et protection gibiers', portant sur la protection anti-gibiers des jeunes plantations, le 28 avril 2026 de 13h00 à 13h30."
+  },
+  {
+    "id": 5,
+    "category": "simple",
+    "question": "Qu'est-ce que l'événement 'Estive en fête !' et où se passe-t-il ?",
+    "expected_answer": "Il s'agit d'une randonnée pastorale festive sur les hauteurs du Tanargue pour découvrir l’estive, le pastoralisme ardéchois et rencontrer les éleveurs. Elle se déroule le samedi 11 juillet 2026 de 09h00 à 16h00, au départ de la Croix de Bauzon à Borne (la croix de Bauzon, Ardèche)."
+  },
+  {
+    "id": 6,
+    "category": "multicritere",
+    "question": "Y a-t-il un événement sur la facturation électronique à Veyras en juillet 2026 ?",
+    "expected_answer": "Oui, le 'Webinaire – La réforme de la facturation électronique : quels changements pour mon exploitation ?' est organisé le mardi 7 juillet 2026 de 14h00 à 15h00. Il s'agit d'un webinaire en ligne organisé par la CA07 pour comprendre les enjeux de la réforme et y préparer les exploitations agricoles sises à Veyras."
+  },
+  {
+    "id": 7,
+    "category": "multicritere",
+    "question": "Recherche une journée technique sur l'hydrologie en forte pente à Cornas début juillet 2026.",
+    "expected_answer": "La 'Journée Technique Hydrologie regénérative en forte pente' correspond tout à fait. C'est une demi-journée technique gratuite ouverte à tous les professionnels qui se tiendra le jeudi 2 juillet 2026 de 08h00 à 12h00 à la Salle des fêtes (salle à l'étage), 2, place de la salle des fêtes, 07130 Cornas."
+  },
+  {
+    "id": 8,
+    "category": "multicritere",
+    "question": "Je cherche une animation sur le pastoralisme ou la randonnée en Ardèche (Borne) en juillet 2026.",
+    "expected_answer": "Vous pouvez participer à l'événement 'Estive en fête !' le samedi 11 juillet 2026 de 09h00 à 16h00. C'est une randonnée pastorale festive qui démarre à la Croix de Bauzon, à Borne (Ardèche), visant à faire découvrir l'estive, le pastoralisme de l'Ardèche et à rencontrer les éleveurs."
+  },
+  {
+    "id": 9,
+    "category": "multicritere",
+    "question": "Proposez-moi une visite de terrain sur les ripisylves et cours d'eau en avril ou mai 2026 à Veyras.",
+    "expected_answer": "Deux visites collectives sur ce thème sont prévues à Veyras (Ardèche) :\n1. Le 29 avril 2026 de 14h00 à 16h30 : 'Visite collective Ripisylves et agriculture : enjeux et gestion' en Sud Ardèche.\n2. Le 18 mai 2026 de 14h00 à 16h30 : 'Visite collective Cours d'eau, Ripisylves et Agriculture sur le Plateau ardéchois : enjeux et gestion'."
+  },
+  {
+    "id": 10,
+    "category": "multicritere",
+    "question": "Est-ce qu'il y a un événement lié aux forêts ou aux parcelles boisées à Désaignes ou Saint-Agrève fin mars 2026 ?",
+    "expected_answer": "Oui, l'événement 'Gestion durable des forêts : une visite de terrain organisée à Désaignes' a lieu le mardi 31 mars 2026 de 09h30 à 12h00. Le point de rendez-vous est fixé sur le parking du magasin LaMaison.fr (ex-GammVert), au lieu-dit les Ribes à Saint-Agrève (07)."
+  },
+  {
+    "id": 11,
+    "category": "piege",
+    "question": "Quels sont les concerts et festivals de musique métal organisés à Lyon en août 2026 ?",
+    "expected_answer": "Désolé, je ne trouve aucun événement concernant la musique métal ou des concerts à Lyon en août 2026 dans notre base de données d'événements."
+  },
+  {
+    "id": 12,
+    "category": "piege",
+    "question": "Quels événements sont prévus à Clermont-Ferrand en juin 2026 ?",
+    "expected_answer": "Je ne trouve aucun événement planifié à Clermont-Ferrand dans notre base de données actuelle pour cette période."
+  },
+  {
+    "id": 13,
+    "category": "piege",
+    "question": "Pouvez-vous me donner les détails de la conférence de presse de Johnny Hallyday à Privas ?",
+    "expected_answer": "Désolé, aucune information n'est disponible sur un événement concernant Johnny Hallyday à Privas dans notre base de données."
+  },
+  {
+    "id": 14,
+    "category": "piege",
+    "question": "Quelles sont les expositions de peinture contemporaine à Grenoble en 2026 ?",
+    "expected_answer": "Désolé, je ne trouve aucune exposition de peinture contemporaine à Grenoble dans notre base de données."
+  },
+  {
+    "id": 15,
+    "category": "reformulee",
+    "question": "Je suis agriculteur et j'aimerais savoir comment anticiper mon départ à la retraite en Ardèche. Des pistes ?",
+    "expected_answer": "Oui, vous pouvez assister aux 'WEBINAIRES Anticiper et réussir sa transmission agricole' organisés par la Chambre d’agriculture de l’Ardèche avec l’ADDEAR Ardèche et la MSA. Ils se déroulent le lundi 27 avril 2026 de 11h00 à 12h00."
+  },
+  {
+    "id": 16,
+    "category": "reformulee",
+    "question": "Y a-t-il des trucs pour lutter contre la dégradation des prairies et les mauvaises herbes à Longes ?",
+    "expected_answer": "Tout à fait ! Une journée technique intitulée '[ Journéee technique ] Restaurer les prairies dégradées pour lutter contre les plantes invasives et avoir un fourrage de qualité' est programmée le mardi 31 mars 2026 de 14h00 à 16h30 au Col de Chassenoud à Longes (69). Elle comprend des démonstrations et des échanges en présence d’un expert des fourrages."
+  },
+  {
+    "id": 17,
+    "category": "reformulee",
+    "question": "Mes jeunes arbres se font dévorer par le gibier, vous auriez pas une formation ou un webinaire là-dessus ?",
+    "expected_answer": "Oui, un événement correspond à votre besoin : le 'WEBINAIRE Plantation arbres et protection gibiers', qui aborde les protections anti-gibiers pour les jeunes plantations. Il est proposé par la Chambre d'agriculture de l'Ardèche et la Fédération Départementale des Chasseurs de l'Ardèche le mardi 28 avril 2026 de 13h00 à 13h30."
+  },
+  {
+    "id": 18,
+    "category": "reformulee",
+    "question": "C'est quoi l'histoire de la nouvelle facture obligatoire pour les fermes en Ardèche, y a pas une réunion ?",
+    "expected_answer": "Oui, deux événements traitent de la réforme de la facturation électronique pour les exploitations agricoles en Ardèche :\n1. 'Facturation électronique' (réunion d’information interconsulaire), le 1er juin 2026 de 16h00 à 17h00 à Coucouron.\n2. 'Webinaire – La réforme de la facturation électronique : quels changements pour mon exploitation ?', le mardi 7 juillet 2026 de 14h00 à 15h00."
+  }
+]
