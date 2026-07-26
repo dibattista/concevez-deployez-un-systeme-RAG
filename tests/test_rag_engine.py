@@ -156,6 +156,163 @@ class TestRAGEngine(unittest.TestCase):
             model="mistral-large-latest", temperature=0
         )  # noqa: E501
 
+    @patch("api.rag_engine.load_dotenv")
+    @patch("api.rag_engine.os.getenv")
+    @patch("api.rag_engine.os.path.exists")
+    @patch("api.rag_engine.MistralAIEmbeddings")
+    @patch("api.rag_engine.FAISS.load_local")
+    @patch("api.rag_engine.ChatMistralAI")
+    def test_ask_success(
+        self,
+        mock_chat,
+        mock_faiss,
+        mock_embeddings,
+        mock_exists,
+        mock_getenv,
+        mock_load_dotenv,
+    ):
+        """
+        Vérifie que ask() retourne la réponse attendue et les
+        sources associées.
+        """
+        mock_getenv.return_value = "mock_api_key"
+        mock_exists.return_value = True
+
+        mock_db = MagicMock()
+        mock_faiss.return_value = mock_db
+
+        mock_doc1 = MagicMock()
+        mock_doc1.page_content = "Contenu de test 1"
+        mock_doc1.metadata = {"uid": "123"}
+
+        mock_db.similarity_search_with_score.return_value = [(mock_doc1, 0.45)]
+
+        mock_llm = MagicMock()
+        mock_chat.return_value = mock_llm
+
+        mock_response = MagicMock()
+        mock_response.content = "Réponse générée"
+        mock_llm.invoke.return_value = mock_response
+
+        engine = RAGEngine()
+        res = engine.ask("Ma question", k=2)
+
+        self.assertEqual(res["answer"], "Réponse générée")
+        self.assertEqual(res["sources"], [{"uid": "123", "score": 0.45}])
+        mock_db.similarity_search_with_score.assert_called_once_with(
+            "Ma question", k=2
+        )  # noqa: E501
+
+    @patch("api.rag_engine.load_dotenv")
+    @patch("api.rag_engine.os.getenv")
+    @patch("api.rag_engine.os.path.exists")
+    @patch("api.rag_engine.MistralAIEmbeddings")
+    @patch("api.rag_engine.FAISS.load_local")
+    @patch("api.rag_engine.ChatMistralAI")
+    def test_ask_search_error(
+        self,
+        mock_chat,
+        mock_faiss,
+        mock_embeddings,
+        mock_exists,
+        mock_getenv,
+        mock_load_dotenv,
+    ):
+        """
+        Vérifie que ask() lève ValueError en cas d'erreur de recherche.
+        """
+        mock_getenv.return_value = "mock_api_key"
+        mock_exists.return_value = True
+
+        mock_db = MagicMock()
+        mock_faiss.return_value = mock_db
+        mock_db.similarity_search_with_score.side_effect = Exception(
+            "Search failed"
+        )  # noqa: E501
+
+        engine = RAGEngine()
+        with self.assertRaises(ValueError) as context:
+            engine.ask("Ma question")
+
+        self.assertIn(
+            "Erreur lors de la recherche sémantique", str(context.exception)
+        )  # noqa: E501
+
+    @patch("api.rag_engine.load_dotenv")
+    @patch("api.rag_engine.os.getenv")
+    @patch("api.rag_engine.os.path.exists")
+    @patch("api.rag_engine.MistralAIEmbeddings")
+    @patch("api.rag_engine.FAISS.load_local")
+    @patch("api.rag_engine.ChatMistralAI")
+    def test_ask_no_docs_found(
+        self,
+        mock_chat,
+        mock_faiss,
+        mock_embeddings,
+        mock_exists,
+        mock_getenv,
+        mock_load_dotenv,
+    ):
+        """
+        Vérifie que ask() lève ValueError si aucun document n'est trouvé.
+        """
+        mock_getenv.return_value = "mock_api_key"
+        mock_exists.return_value = True
+
+        mock_db = MagicMock()
+        mock_faiss.return_value = mock_db
+        mock_db.similarity_search_with_score.return_value = []
+
+        engine = RAGEngine()
+        with self.assertRaises(ValueError) as context:
+            engine.ask("Ma question")
+
+        self.assertIn(
+            "Aucun document trouvé pour la question", str(context.exception)
+        )  # noqa: E501
+
+    @patch("api.rag_engine.load_dotenv")
+    @patch("api.rag_engine.os.getenv")
+    @patch("api.rag_engine.os.path.exists")
+    @patch("api.rag_engine.MistralAIEmbeddings")
+    @patch("api.rag_engine.FAISS.load_local")
+    @patch("api.rag_engine.ChatMistralAI")
+    def test_ask_generation_error(
+        self,
+        mock_chat,
+        mock_faiss,
+        mock_embeddings,
+        mock_exists,
+        mock_getenv,
+        mock_load_dotenv,
+    ):
+        """
+        Vérifie que ask() lève RuntimeError en cas d'erreur de génération.
+        """
+        mock_getenv.return_value = "mock_api_key"
+        mock_exists.return_value = True
+
+        mock_db = MagicMock()
+        mock_faiss.return_value = mock_db
+
+        mock_doc1 = MagicMock()
+        mock_doc1.page_content = "Contenu de test 1"
+        mock_doc1.metadata = {"uid": "123"}
+        mock_db.similarity_search_with_score.return_value = [(mock_doc1, 0.45)]
+
+        mock_llm = MagicMock()
+        mock_chat.return_value = mock_llm
+        mock_llm.invoke.side_effect = Exception("LLM crash")
+
+        engine = RAGEngine()
+        with self.assertRaises(RuntimeError) as context:
+            engine.ask("Ma question")
+
+        self.assertIn(
+            "Erreur lors de la génération de la réponse",
+            str(context.exception),  # noqa: E501
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
